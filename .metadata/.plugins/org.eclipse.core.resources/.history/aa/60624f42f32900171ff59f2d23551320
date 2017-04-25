@@ -32,7 +32,7 @@ public class SudokuIO {
 					else {
 						System.out.print(board[j][l]+" ");
 					}
-					if (l == 2 || l == 5){
+					if (l%4 == 0){
 						System.out.print("  ");
 					}
 				}

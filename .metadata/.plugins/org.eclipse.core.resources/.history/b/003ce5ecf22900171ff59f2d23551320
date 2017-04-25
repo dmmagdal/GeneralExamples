@@ -21,7 +21,7 @@ public class SudokuIO {
 		// print out board
 		for (int j = 0; j < 11; j++){
 			for (int l = 0; l < 9; l++){
-				if (board[j][l] == null){
+				if (board[j][l].equals(null)){
 					continue;
 				}
 				else {
@@ -32,7 +32,7 @@ public class SudokuIO {
 					else {
 						System.out.print(board[j][l]+" ");
 					}
-					if (l == 2 || l == 5){
+					if (l%3 == 0){
 						System.out.print("  ");
 					}
 				}
