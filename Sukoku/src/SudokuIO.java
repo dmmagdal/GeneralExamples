@@ -6,7 +6,7 @@ public class SudokuIO {
 		// variable initialization
 		Scanner in = new Scanner(new File("input.txt"));
 		int linenum = 0;
-		String[][] board = new String[9][9];
+		String[][] board = new String[11][9];
 		
 		// take in input from file and store to board[][]
 		while (in.hasNextLine()){
@@ -17,16 +17,16 @@ public class SudokuIO {
 			linenum++;
 		}
 		
-		// check for "complete" board
-		for (int j = 0; j < 9; j++){
+		// print out board
+		for (int j = 0; j < 11; j++){
 			for (int l = 0; l < 9; l++){
-				if (board[j][l] == "0"){
+				if (board[j][l].equals("0")){
 					System.out.print("- ");
 				}
 				else {
 					System.out.print(board[j][l]+" ");
 				}
-				if (j%3 == 0){
+				if (l%3 == 0){
 					System.out.print("  ");
 				}
 			}
