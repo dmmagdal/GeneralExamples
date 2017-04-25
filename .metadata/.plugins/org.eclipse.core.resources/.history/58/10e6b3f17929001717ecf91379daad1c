@@ -1,0 +1,19 @@
+import java.io.*;
+import java.util.*;
+
+public class SudokuIO {
+	public static void main(String[] args) throws IOException, FileNotFoundException {
+		Scanner in = new Scanner(new File("input.txt"));
+		int linenum = 0;
+		String[][] board = new String[9][9];
+		
+		while (in.hasNextLine()){
+			String[] input = in.nextLine().split("\\W+");
+			for (int k = 0; k < input.length; k++){
+				board[linenum][k] = input[k];
+			}
+			linenum++;
+		}
+		
+	}
+}
