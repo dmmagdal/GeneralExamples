@@ -90,22 +90,18 @@ public class Sudoku {
 	}
 	
 	public static String[][] bynumber(String[][] board){
-		
 		return board;
 	}
 	
 	public static String[][] bysquare(String[][] board){
-		
 		return board;
 	}
 	
 	public static String[][] byrow(String[][] board){
-		
 		return board;
 	}
 	
 	public static String[][] bycol(String[][] board){
-		
 		return board;
 	}
 }

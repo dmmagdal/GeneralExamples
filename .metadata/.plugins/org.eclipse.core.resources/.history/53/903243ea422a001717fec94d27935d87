@@ -26,16 +26,9 @@ public class Sudoku {
 		// print initial state of puzzle
 		print(board, filled);
 		
-		// working on solving the puzzle
 		while (finished(board, filled) == false){
-			bynumber(board);
-			bysquare(board);
-			byrow(board);
-			bycol(board);
+			
 		}
-		
-		// print final state of board
-		print(board, filled);
 		
 		in.close();
 	}
@@ -64,10 +57,10 @@ public class Sudoku {
 		}
 		System.out.print("\n");
 		if (filled == false){
-			System.out.println("The puzzle is not filled.");
+			System.out.print("The puzzle is not filled.");
 		}
 		else {
-			System.out.println("The puzzled is filled.");
+			System.out.print("The puzzled is filled.");
 		}
 	}
 	
@@ -87,25 +80,5 @@ public class Sudoku {
 			}
 		}
 		return filled;
-	}
-	
-	public static String[][] bynumber(String[][] board){
-		
-		return board;
-	}
-	
-	public static String[][] bysquare(String[][] board){
-		
-		return board;
-	}
-	
-	public static String[][] byrow(String[][] board){
-		
-		return board;
-	}
-	
-	public static String[][] bycol(String[][] board){
-		
-		return board;
 	}
 }
