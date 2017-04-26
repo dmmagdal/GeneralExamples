@@ -65,7 +65,6 @@ public class Sudoku {
 				}
 			}
 		}
-		return board;
 	}
 	
 	public static void print(int[][] board, boolean filled){
@@ -115,8 +114,8 @@ public class Sudoku {
 	public static boolean solve(int[][] board){
 		int row, col;
 		// Base case: if there are no unassigned locations 
-		// (Puzzle is solved), the program is done.
-		if (!findempty(board)){
+		// (Puzzle is solved, the program is done.
+		if (!findempty(board, row, col)){
 			return true;
 		}
 		
@@ -140,54 +139,24 @@ public class Sudoku {
 		return false; // start backtracking
 	}
 	
-	public static boolean findempty(int[][] board){
-		// scans the board for 0 (empty) slots
-		for (int row = 0; row < 9; row++){
-			for (int col = 0; col < 9; col++){
-				if (board[row][col] == 0){
-					return true;
-				}
-			}
-		}
-		return false;
+	boolean findempty(){
+		
 	}
 	
-	public static boolean issafe(int[][] board, int row, int col, int num){
-		// check to make sure that num is not already in current row,
-		// col, or box
-		return !inrow(board, row, num) && !incol(board, col, num) && !inbox(board, row-row%3, col-col%3, num);
+	boolean issafe(){
+		
 	}
 	
-	public static boolean inrow(int[][] board, int row, int num){
-		// check to see if num already exists in current row
-		for (int col = 0; col < 9; col++){
-			if (board[row][col] == num){
-				return true;
-			}
-		}
-		return false;
+	boolean inrow(){
+		
 	}
 	
-	public static boolean incol(int[][] board, int col, int num){
-		// check to see if num already exists in current col
-		for (int row = 0; row < 9; row++){
-			if (board[row][col] == num){
-				return true;
-			}
-		}
-		return false;
+	boolean incol(){
+		
 	}
 	
-	public static boolean inbox(int[][] board, int startrow, int startcol, int num){
-		// check to see if num already exists in current box
-		for (int row = 0; row < 3; row++){
-			for (int col = 0; col < 3; col++){
-				if (board[row+startrow][col+startcol] == num){
-					return true;
-				}
-			}
-		}
-		return false;
+	boolean inbox(){
+		
 	}
 	
 	
