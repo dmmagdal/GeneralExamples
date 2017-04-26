@@ -28,9 +28,8 @@ public class Sudoku {
 		
 		// working on solving the puzzle
 		while (finished(board, filled) == false){
-			
-			/*
 			bynumber(board);
+			/*
 			bysquare(board);
 			byrow(board);
 			bycol(board);
@@ -92,15 +91,12 @@ public class Sudoku {
 		return filled;
 	}
 	
-	/*
 	public static String[][] bynumber(String[][] board){
-		int counter = 0;
-		int num = 1;
-		for (int i = 1; i < 10; i++){
-					}
+		
 		return board;
 	}
 	
+	/*
 	public static String[][] bysquare(String[][] board){
 		
 		return board;

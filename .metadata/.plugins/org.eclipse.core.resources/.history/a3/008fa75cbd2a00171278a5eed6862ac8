@@ -28,13 +28,10 @@ public class Sudoku {
 		
 		// working on solving the puzzle
 		while (finished(board, filled) == false){
-			
-			/*
 			bynumber(board);
 			bysquare(board);
 			byrow(board);
 			bycol(board);
-			*/
 		}
 		
 		// print final state of board
@@ -92,12 +89,8 @@ public class Sudoku {
 		return filled;
 	}
 	
-	/*
 	public static String[][] bynumber(String[][] board){
-		int counter = 0;
-		int num = 1;
-		for (int i = 1; i < 10; i++){
-					}
+		
 		return board;
 	}
 	
@@ -107,9 +100,7 @@ public class Sudoku {
 	}
 	
 	public static String[][] byrow(String[][] board){
-		for (int i = 0; i < 11; i++){
-			
-		}
+		
 		return board;
 	}
 	
@@ -117,5 +108,4 @@ public class Sudoku {
 		
 		return board;
 	}
-	*/
 }

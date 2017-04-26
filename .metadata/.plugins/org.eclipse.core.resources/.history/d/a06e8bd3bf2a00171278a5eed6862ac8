@@ -1,0 +1,19 @@
+
+public class Node {
+	public int num;
+	public int[] coord;
+	public Node next;
+	
+	public Node(){
+		this.num = 0;
+		this.coord = null;
+		this.next = null;
+	}
+	
+	public Node(int n, int x, int y){
+		num = n;
+		coord[] = new int[2];
+		coord[0] = x;
+		coord[1] = y;
+	}
+}
