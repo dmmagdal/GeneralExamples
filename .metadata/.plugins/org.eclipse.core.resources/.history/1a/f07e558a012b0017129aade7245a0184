@@ -54,23 +54,22 @@ public class Sudoku {
 	}
 	
 	public static int[][] convert(String[][] Board){
+		int[][] board1 = new int[11][9];
 		int[][] board = new int[9][9];
-		for (int i = 0; i < 3; i++){
+		for (int i = 0; i < 11; i++){
 			for (int j = 0; j < 9; j++){
-				board[i][j] = Integer.parseInt(Board[i][j]);
+				if (Board[i][j] == null || Board[i][j].equals("")){
+					continue;
+				}
+				else{
+					board1[i][j] = Integer.parseInt(Board[i][j]);
+				}
 			}
 		}
-		for (int k = 4; k < 7; k++){
-			for (int l = 0; l < 9; l++){
-				board[k-1][l] = Integer.parseInt(Board[k][l]);
-			}
+		// shift rows down for rows 3 and 5
+		for (int k = 3; k < 11; k++){
+			for ()
 		}
-		for (int m = 8; m < 11; m++){
-			for (int n = 0; n < 9; n++){
-				board[m-2][n] = Integer.parseInt(Board[m][n]);
-			}
-		}
-		
 		return board;
 	}
 	
@@ -90,9 +89,6 @@ public class Sudoku {
 				}
 			}
 			System.out.print("\n");
-			if (j == 2 || j == 5){
-				System.out.print("\n");
-			}
 		}
 		System.out.print("\n");
 		if (filled == false){

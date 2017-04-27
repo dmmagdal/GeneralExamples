@@ -90,9 +90,6 @@ public class Sudoku {
 				}
 			}
 			System.out.print("\n");
-			if (j == 2 || j == 5){
-				System.out.print("\n");
-			}
 		}
 		System.out.print("\n");
 		if (filled == false){

@@ -62,12 +62,12 @@ public class Sudoku {
 		}
 		for (int k = 4; k < 7; k++){
 			for (int l = 0; l < 9; l++){
-				board[k-1][l] = Integer.parseInt(Board[k][l]);
+				board[k][l] = Integer.parseInt(Board[k][l]);
 			}
 		}
 		for (int m = 8; m < 11; m++){
 			for (int n = 0; n < 9; n++){
-				board[m-2][n] = Integer.parseInt(Board[m][n]);
+				board[m][n] = Integer.parseInt(Board[m][n]);
 			}
 		}
 		
@@ -90,9 +90,6 @@ public class Sudoku {
 				}
 			}
 			System.out.print("\n");
-			if (j == 2 || j == 5){
-				System.out.print("\n");
-			}
 		}
 		System.out.print("\n");
 		if (filled == false){
