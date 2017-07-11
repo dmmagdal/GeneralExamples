@@ -1,0 +1,26 @@
+
+public class sudoku2 {
+	public static void main(String[] args){
+		
+	}
+	
+	public boolean solve(int[][] arg){
+		
+	}
+	
+	public boolean isSafe(int[][] arg, int row, int col, int num){
+		return !inRow() && !inCol() && !inSquare();
+	}
+	
+	public boolean inRow(){
+		
+	}
+	
+	public boolean inCol(){
+		
+	}
+	
+	public boolean inSquare(){
+		
+	}
+}

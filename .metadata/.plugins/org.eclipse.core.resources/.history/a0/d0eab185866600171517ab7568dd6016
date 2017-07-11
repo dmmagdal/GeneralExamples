@@ -1,0 +1,43 @@
+
+public class sudoku2 {
+	public static void main(String[] args){
+		
+	}
+	
+	public boolean solve(int[][] arg){
+		
+	}
+	
+	public boolean isSafe(int[][] arg, int row, int col, int num){
+		return !inRow(arg, row, num) && !inCol(arg, col, num) && !inSquare(arg, row, col, num);
+	}
+	
+	public boolean inRow(int[][] arg, int row, int num){
+		for (int i = 0; i < 9; i++){
+			if (arg[row][i] == num){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean inCol(int[][] arg, int col, int num){
+		for (int i = 0; i < 9; i++){
+			if (arg[i][col] == num){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean inSquare(int[][] arg, int row, int col, int num){
+		for (int i = 0; i < 3; i++){
+			for (int j = 0; j < 3; j++){
+				if (arg[i+row][j+col] == num){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+}
