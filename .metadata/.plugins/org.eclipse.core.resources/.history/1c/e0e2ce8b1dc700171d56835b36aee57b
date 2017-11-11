@@ -1,0 +1,137 @@
+
+class Deck{
+	private int numItems;							// reference to how many cards are in a deck
+	private List D;									// list of cards in the deck
+	
+	// Deck constructor
+	public Deck(){
+		D = new List();								// create new list hold the deck of cards
+		for (int i = 0; i < 52; i++){				// create a new card object and store it to the list
+			String s;								// string to store the suit
+			String r;								// string to store the rank
+			switch (i%13){							// switch statement to assign the rank and suit
+				case (0):
+					r = "ACE";
+					break;
+				case (1):
+					r = "Two";
+					break;
+				case (2):
+					r = "Three";
+					break;
+				case (3):
+					r = "Four";
+					break;
+				case (4):
+					r = "Five";
+					break;
+				case (5):
+					r = "Six";
+					break;
+				case (6):
+					r = "Seven";
+					break;
+				case (7):
+					r = "Eight";
+					break;
+				case (8):
+					r = "Nine";
+					break;
+				case (9):
+					r = "Ten";
+					break;
+				case (10):
+					r = "Jack";
+					break;
+				case (11):
+					r = "Queen";
+					break;
+				case (12):
+					r = "King";
+					break;
+			}
+			if (i >= 0 && i < 13){
+				s = "Spade";
+			}
+			else if (i >= 13 && i < 26){
+				s = "Heart";
+			}
+			else if (i >= 26 && i < 39){
+				s = "Club";
+			}
+			else{
+				s = "Diamond";
+			}
+			Card c = new Card(s, r);
+			D.append(c);
+		}
+		numItems = D.length();
+	}
+	
+	// shuffle the deck
+	// @param takes no arguments
+	// @return returns nothing
+	public void shuffle(){
+		
+	}
+	
+	// deals out a set number of cards from the deck
+	// @param takes an int to determine how many cards are dealt from the deck
+	// @return returns a list of the cards handed out from the deck
+	public List deal(int handSize){
+		if (handSize <= numItems){
+			List hand = new List();
+			for (int i = 0; i <= handSize; i++){
+				hand.append(D.front());
+				D.deleteFront();
+			}
+			return hand;
+		}
+	}
+	
+	public String toString(){
+		return D.toString();
+	}
+	
+	private class Card{
+		private String suit;
+		private String rank;
+		
+		public Card(String s, String r){
+			suit = s;
+			rank = r;
+		}
+		
+		private String getSuit(){
+			return suit;
+		}
+		
+		private String getRank(){
+			return rank;
+		}
+		
+		private void setSuit(String newSuit){
+			suit = newSuit;
+		}
+		
+		private void setRank(String newRank){
+			rank = newRank;
+		}
+		
+		public boolean equals(Object x){
+			boolean equal = false;
+			if (x instanceof Card){
+				Card N = (Card)x;
+				if (rank.equals(N.rank) && suit.equals(N.suit)){
+					equal = true;
+				}
+			}
+			return equal;
+		}
+		
+		public String toString(){
+			String str = rank+" of "+suit;
+			return str;
+		}
+	}
+}

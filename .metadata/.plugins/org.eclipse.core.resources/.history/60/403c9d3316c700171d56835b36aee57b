@@ -1,0 +1,76 @@
+
+class Deck{
+	private int numItems;
+	
+	public Deck(){
+		List D = new List();
+		
+		for (int i = 0; i < 52; i++){
+			
+		}
+	}
+	
+	
+	
+	private class Node{
+		private String suit;
+		private String rank;
+		private Node next;
+		private Node prev;
+		
+		private Node(String s, String r){
+			suit = s;
+			rank = r;
+			next = null;
+			prev = null;
+		}
+		
+		private String getSuit(){
+			return suit;
+		}
+		
+		private String getRank(){
+			return rank;
+		}
+		
+		private Node getNext(){
+			return next;
+		}
+		
+		private Node getPrev(){
+			return prev;
+		}
+		
+		private void setSuit(String newSuit){
+			suit = newSuit;
+		}
+		
+		private void setRank(String newRank){
+			rank = newRank;
+		}
+		
+		private void setNext(Node nx){
+			next = nx;
+		}
+		
+		private void setPrev(Node pv){
+			prev = pv;
+		}
+		
+		public boolean equals(Object x){
+			boolean equal = false;
+			if (x instanceof Node){
+				Node N = (Node)x;
+				if (rank.equals(N.rank) && suit.equals(N.suit)){
+					boolean = true;
+				}
+			}
+			return equal;
+		}
+		
+		public String toString(){
+			String str = rank+" of "+suit;
+			return str;
+		}
+	}
+}

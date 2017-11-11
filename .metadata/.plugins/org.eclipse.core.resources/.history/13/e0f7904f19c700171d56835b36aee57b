@@ -1,0 +1,120 @@
+
+class Deck{
+	private int numItems;
+	private List D;
+	
+	public Deck(){
+		D = new List();
+		for (int i = 0; i < 52; i++){
+			String s;
+			String r;
+			switch (i%13){
+				case (0):
+					s = i;
+					r = "";
+					break;
+				case (1):
+					s = i;
+					r = "";
+					break;
+				case (2):
+					s = i;
+					r = "";
+				case (3):
+					s = i;
+					r = "";
+					break;
+				case (4):
+					s = i;
+					r = "";
+					break;
+				case (5):
+					s = i;
+					r = "";
+				case (6):
+					s = i;
+					r = "";
+					break;
+				case (7):
+					s = i;
+					r = "";
+					break;
+				case (8):
+					s = i;
+					r = "";
+				case (9):
+					s = i;
+					r = "";
+					break;
+				case (10):
+					s = i;
+					r = "";
+					break;
+				case (11):
+					s = i;
+					r = "";
+				case (12):
+					s = i;
+					r = "";
+					break;
+				case (13):
+					s = i;
+					r = "";
+					break;
+			}
+			Card c = new Card(s, r);
+			D.append(c);
+		}
+		numItems = D.length();
+	}
+	
+	public void shuffle(){
+		
+	}
+	
+	public String toString(){
+		return D.toString();
+	}
+	
+	private class Card{
+		private String suit;
+		private String rank;
+		
+		public Card(String s, String r){
+			suit = s;
+			rank = r;
+		}
+		
+		private String getSuit(){
+			return suit;
+		}
+		
+		private String getRank(){
+			return rank;
+		}
+		
+		private void setSuit(String newSuit){
+			suit = newSuit;
+		}
+		
+		private void setRank(String newRank){
+			rank = newRank;
+		}
+		
+		public boolean equals(Object x){
+			boolean equal = false;
+			if (x instanceof Card){
+				Card N = (Card)x;
+				if (rank.equals(N.rank) && suit.equals(N.suit)){
+					equal = true;
+				}
+			}
+			return equal;
+		}
+		
+		public String toString(){
+			String str = rank+" of "+suit;
+			return str;
+		}
+	}
+}

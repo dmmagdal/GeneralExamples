@@ -4,4 +4,5 @@
 <fullyQualifiedTypeName name="org.opencv.core.Mat"/>
 <fullyQualifiedTypeName name="org.opencv.core.CvType"/>
 <fullyQualifiedTypeName name="javafx.fxml.FXMLLoader"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
 </qualifiedTypeNameHistroy>
