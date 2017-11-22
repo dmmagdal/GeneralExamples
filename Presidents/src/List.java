@@ -125,7 +125,7 @@ class List {
 	}
 
 	/** if the cursor is defined and not at the front, place the cursor one step closer to the front of the list.
-	if the cursor is defined and at the front, the cursor becomes undefined. if the cursor is undifined, do nothing 
+	if the cursor is defined and at the front, the cursor becomes undefined. if the cursor is undefined, do nothing 
 	@param takes no arguments 
 	@return returns nothing **/
 	public void movePrev(){
@@ -141,7 +141,7 @@ class List {
 	}
 
 	/** if the cursor is defined and not at the back, place the cursor one step closer to the back of the list.
-	if the cursor is defined and at the back, the cursor becomes undefined. if the cursor is undifined, do nothing 
+	if the cursor is defined and at the back, the cursor becomes undefined. if the cursor is undefined, do nothing 
 	@param takes no arguments 
 	@return returns nothing **/
 	public void moveNext(){
@@ -321,7 +321,7 @@ class List {
 
 
 	/** tells if the list is empty or not 
-	@param takes no argmuents
+	@param takes no arguments
 	@return returns true if the list is empty and false if it is not **/
 	private boolean isEmpty(){
 		boolean empty = false;						// initialize the boolean empty to false (assuming the list is not empty until proven otherwise (conditional below))

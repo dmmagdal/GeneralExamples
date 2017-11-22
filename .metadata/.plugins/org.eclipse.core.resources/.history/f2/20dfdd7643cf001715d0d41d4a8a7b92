@@ -1,0 +1,94 @@
+public class Card {
+	private String suit;							// hold the suit data
+	private String rank;							// hold the rank data
+		
+	// card constructor
+	public Card(String s, String r){
+		suit = s;
+		rank = r;
+	}
+	
+	public int compareToRank(Card c){
+		int ret = 0;
+		if (c.getRank()){
+			ret = -1;
+		}
+		return ret;
+	}
+	
+	private int convertRankToInt(){
+		int num = 0;
+		if (getRank().equals("Ace")){
+			num = 14;
+		}
+		else if (getRank().equals("Two")){
+			num = 2;
+		}
+		else if (getRank().equals("Three")){
+			num = 3;
+		}
+		else if (getRank().equals("Four")){
+			num = 4;
+		}
+		else if (getRank().equals("Five")){
+			num = 5;
+		}
+		else if (getRank().equals("Six")){
+			num = 6;
+		}
+		else if (getRank().equals("Seven")){
+			num = 7;
+		}
+		else if (getRank().equals("Eight")){
+			num = 8;
+		}
+		else if (getRank().equals("Nine")){
+			num = 9;
+		}
+		else if (getRank().equals("Ten")){
+			num = 10;
+		}
+		else if (getRank().equals("Jack")){
+			num = 11;
+		}
+		else if (getRank().equals("Queen")){
+			num = 12;
+		}
+		else if (getRank().equals("King")){
+			num = 13;
+		}
+		return num;
+	}
+		
+	private String getSuit(){
+		return suit;
+	}
+		
+	private String getRank(){
+		return rank;
+	}
+		
+	private void setSuit(String newSuit){
+		suit = newSuit;
+	}
+		
+	private void setRank(String newRank){
+		rank = newRank;
+	}
+		
+	public boolean equals(Object x){
+		boolean equal = false;
+		if (x instanceof Card){
+			Card N = (Card)x;
+			if (rank.equals(N.rank) && suit.equals(N.suit)){
+				equal = true;
+			}
+		}
+		return equal;
+	}
+	
+	public String toString(){
+		String str = rank+" of "+suit;
+		return str;
+	}
+}

@@ -1,0 +1,97 @@
+
+public class Bot {
+	private List hand;
+	
+	// bot constructor
+	public Bot(){
+		hand = new List();
+	}
+	
+	public List getHand(){
+		return hand;
+	}
+	
+	public void setHand(List newHand){
+		hand = newHand;
+	}
+	
+	// makes a move
+	// @param takes a list that is the top most card set thrown down in the pile
+	// @return returns nothing
+	public void move(List top){
+		if (top.length() == 5 && containsFiveCard()){
+			
+		}
+		else if (top.length() == 4 && containsDouble()){
+			
+		}
+		else if (top.length() == 2 && containsSingle()){
+			
+		}
+		else if (top.length() == 1){
+			
+		}
+	}
+	
+	private boolean containsFiveCard(){
+		boolean contains = true;
+		if (hand.length() < 5){
+			contains = false;
+		}
+		else if (!containsFullHouse() && !containsFourOfAKind() && !containsStraightFlush() && !containsFlush() && !containsStraight()){
+			contains = false;
+		}
+		return contains;
+	}
+	
+	private boolean containsFullHouse(){
+		boolean contains = true;
+		if (!containsDouble() && !containsTriple()){
+			contains = false;
+		}
+		return contains;
+	}
+	
+	private boolean containsTriple(){
+		return false;
+	}
+	
+	private boolean containsDouble(){
+		return false;
+	}
+	
+	private boolean containsSingle(){
+		return false;
+	}
+	
+	private boolean isFiveCard(){
+		return false;
+	}
+	
+	private boolean isDouble(){
+		return false;
+	}
+	
+	private boolean isSingle(){
+		return false;
+	}
+	
+	// sort the bot's hand by rank
+	// @param takes nothing
+	// @return returns nothing
+	private void sortRank(){
+		List sorted = new List();							// create new list that is to be sorted version of the bot's hand
+		sorted.append(hand.front());						// append the first item in the hand
+		hand.deleteFront();									// delete front of hand
+		sorted.moveFront();									// move cursor to front of the sorted list
+		while (sorted.get() != null){						// while the cursor of the sorted list is not the front
+			Card cursorCard = (Card) sorted.get();			// convert sorted cursor
+			Card sortedCursorCard = (Card) sorted.front();
+			if (cursorCard.compareToRank(sortedCursorCard) == -1){
+				
+			}
+		}
+		
+		hand = sorted;
+	}
+}
