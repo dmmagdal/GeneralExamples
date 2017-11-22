@@ -1,0 +1,44 @@
+
+public class Bot {
+	private List hand;
+	
+	// bot constructor
+	public Bot(){
+		hand = new List();
+	}
+	
+	public List getHand(){
+		return Hand;
+	}
+	
+	public void setHand(List newHand){
+		hand = newHand;
+	}
+	
+	public void move(List top){
+		if (top.length() == 5){
+			
+		}
+		else if (top.length() == 4){
+			
+		}
+		else if (top.length() == 2){
+			
+		}
+		else {
+			
+		}
+	}
+	
+	public boolean isFiveCard(){
+		return false;
+	}
+	
+	public boolean isDouble(){
+		return false;
+	}
+	
+	public boolean isSingle(){
+		return false;
+	}
+}

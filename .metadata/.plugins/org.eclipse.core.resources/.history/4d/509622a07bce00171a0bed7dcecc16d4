@@ -1,0 +1,44 @@
+import Presidents.Card;
+
+public class Card {
+	private String suit;							// hold the suit data
+	private String rank;							// hold the rank data
+		
+	// card constructor
+	public Card(String s, String r){
+		suit = s;
+		rank = r;
+	}
+		
+	private String getSuit(){
+		return suit;
+	}
+		
+	private String getRank(){
+		return rank;
+	}
+		
+	private void setSuit(String newSuit){
+		suit = newSuit;
+	}
+		
+	private void setRank(String newRank){
+		rank = newRank;
+	}
+		
+	public boolean equals(Object x){
+		boolean equal = false;
+		if (x instanceof Card){
+			Card N = (Card)x;
+			if (rank.equals(N.rank) && suit.equals(N.suit)){
+				equal = true;
+			}
+		}
+		return equal;
+	}
+	
+	public String toString(){
+		String str = rank+" of "+suit;
+		return str;
+	}
+}

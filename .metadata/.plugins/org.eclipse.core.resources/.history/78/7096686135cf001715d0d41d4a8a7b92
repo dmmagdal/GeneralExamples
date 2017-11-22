@@ -1,0 +1,25 @@
+
+public class Bot {
+	private List hand;
+	
+	// bot constructor
+	public Bot(){
+		hand = new List();
+	}
+	
+	public void move(){
+		
+	}
+	
+	public boolean isFiveCard(){
+		return false;
+	}
+	
+	public boolean isDouble(){
+		return false;
+	}
+	
+	public boolean isSingle(){
+		return false;
+	}
+}
