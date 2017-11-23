@@ -69,19 +69,19 @@ public class Card {
 		return num;
 	}
 		
-	private String getSuit(){
+	public String getSuit(){
 		return suit;
 	}
 		
-	private String getRank(){
+	public String getRank(){
 		return rank;
 	}
 		
-	private void setSuit(String newSuit){
+	public void setSuit(String newSuit){
 		suit = newSuit;
 	}
 		
-	private void setRank(String newRank){
+	public void setRank(String newRank){
 		rank = newRank;
 	}
 		
