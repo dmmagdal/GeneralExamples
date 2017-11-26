@@ -51,7 +51,7 @@ class Presidents{
 			}
 		}
 		else {										// else (2 or 4 players so no need to worry about remainder)
-			player.setHand(deal(Deck, 52/order.length));			// set the player and bot hands to be dealt this way
+			player.setHand(deal(Deck, 52/order.length));	// set the player and bot hands to be dealt this way
 			for (int k = 0; k < cpi.length; k++){
 				cpi[k].setHand(deal(Deck, 52/order.length));
 			}
@@ -65,15 +65,29 @@ class Presidents{
 			else {									// else (check if the bots have empty hands)
 				for (int j = 0; j < cpi.length; j++){	// iterate through the bot array
 					if (cpi[j].getHand().length() == 0){	// if the bot's hand is empty
-						newOrder[j] = orderNum;		// set the order number to the bot's index in newOrder arrau
+						newOrder[j] = orderNum;		// set the order number to the bot's index in newOrder array
 						orderNum++;					// increment the order number
 					}
 				}
 			}
 			
-			
+			int position = 0;
+			while (position != newOrder.length){
+				for (int m = 0; m < newOrder.length; m++){
+					if (newOrder[m] == position && m == 0){	// if the position is the player's position
+						if (player.move(Deck) != null){
+							Deck = player.move(Deck);
+						}
+					}
+					else if (newOrder[m] == position && m != 0){	// if the position is a computer
+						if (cpi[m].move(Deck) != null){
+							Deck = cpi[m].move(Deck);
+						}
+					}
+				}
+				position++;
+			}
 		}
-		
 		return newOrder;							// return the array with the new order set
 	}
 	
@@ -154,7 +168,7 @@ class Presidents{
 			D.moveFront();
 			while (D.get() != null){
 				if(D.index() == i){
-					Card c = (Card)D.get();
+					Card c = (Card) D.get();
 					D.delete();
 					D.append(c);
 				}

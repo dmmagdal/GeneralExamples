@@ -1,0 +1,427 @@
+
+public class Bot {
+	private List hand;															// List to hold all the cards in the hand
+	private int order;															// int to hold the order/ rank of the bot
+	
+	// bot constructor
+	public Bot(){
+		hand = new List();
+		order = 0;
+	}
+	
+	public List getHand(){
+		return hand;
+	}
+	
+	public void setHand(List newHand){
+		hand = newHand;
+	}
+	
+	public int getOrder(){
+		return order;
+	}
+	
+	public void setOrder(int newOrder){
+		order = newOrder;
+	}
+	
+	/** makes a move
+	@param takes a list that is the top most card set thrown down in the pile
+	@return returns nothing **/
+	public List move(List top){
+		sortRank();
+		List stack = new List();
+		if (top.length() == 5 && containsFiveCard(hand)){						// if there are five cards and there are five card hands
+			if (containsStraightFlush(top) && containsStraightFlush(hand)){		// if there is a straight flush 
+				if (containsStraightFlush(top) && containsStraightFlush(hand)){	// if they're of the same five card type
+					
+				}
+			}
+			else if (containsFourOfAKind(top) && (containsFourOfAKind(hand) || containsStraightFlush(hand))){	// else if there is a four of a kind
+				if (containsFourOfAKind(top) && containsFourOfAKind(hand)){		// if they're of the same five card type
+					
+				}
+			}
+			else if (containsFullHouse(top) && (containsFullHouse(hand) || containsFourOfAKind(hand) || containsStraightFlush(hand))){	// else if there is a full house
+				if (containsFullHouse(top) && containsFullHouse(hand)){			// if they're of the same five card type
+					
+				}
+			}
+			else if (containsFlush(top) && (containsFlush(hand) || containsFullHouse(hand) || containsFourOfAKind(hand) || containsStraightFlush(hand))){	// else if there is a flush
+				if (containsFlush(top) && containsFlush(hand)){					// if they're of the same five card type
+					
+				}
+			}
+			else if (containsStraight(top) && containsStraight(hand)){			// else if there is a straight
+				if (containsStraight(top) && containsStraight(hand)){			// if they're of the same five card type
+					
+				}
+			}
+		}
+		else if (top.length() == 4 && containsDouble(hand)){					// else if there are pairs (double), play double (pair)
+			stack = throwDouble(top, hand);										// run throwDouble() method and set the resulting list to the stack list
+		}
+		else if (top.length() == 2 && containsSingle(hand)){					// else if there are pairs (singular), play single (pair)
+			stack = throwSingle(top, hand);
+		}
+		else if (top.length() == 1){											// else if there are singles, play "high card"
+			boolean thrown = false;
+			hand.moveFront();
+			while (hand.get() != null && thrown == false){
+				Card topCard = (Card) top.get();
+				Card handCard = (Card) hand.get();
+				if (topCard.compareToRank(handCard) > 0 || (topCard.compareToRank(handCard) == 0 && topCard.compareToSuit(handCard) == 1)){
+					stack.append(handCard);
+					thrown = true;
+				}
+			}
+			if (thrown == false){
+				stack.clear();
+			}
+		}
+		// else "pass" (do nothing) pass will be a null or empty stack list
+		return stack;
+	}
+	
+	/** says whether a list contains a five card hand
+	@param takes a List
+	@return returns a boolean regarding whether it has a five card hand **/
+	private boolean containsFiveCard(List five){
+		boolean contains = true;												// initialize a boolean to true
+		if (five.length() < 5){													// if there are less than five cards in the hand
+			contains = false;													// set the boolean to false
+		}
+		else if (!containsFullHouse(five) && !containsFourOfAKind(five) && !containsStraightFlush(five) && !containsFlush(five) && !containsStraight(five)){	// else if there is no full house, four of a kind, straight flush, flush, or straight 
+			contains = false;													// set the boolean to false
+		}
+		return contains;														// return the boolean
+	}
+	
+	/** says whether the hand contains a full house
+	@param takes a List
+	@return returns a boolean regarding whether it has a full house **/
+	private boolean containsFullHouse(List five){
+		sortRank();																// sort the hand
+		boolean contains = false;												// initialize a boolean to false
+		List singlePair = new List();											// create a list to hold the pair
+		List triple = new List();												// create a list to hold the triple
+		five.moveFront();														// move cursor of hand to front
+		while (five.index() != five.length()-1 && contains == false){			// while the cursor is not the last entry in the hand and the boolean is still false
+			Card cursor = (Card) five.get();									// convert cursor to a card
+			five.moveNext();													// move cursor along hand
+			Card next = (Card) five.get();										// repeat for next and third card
+			five.moveNext();
+			Card third = (Card) five.get();
+			if (cursor.getRank().equals(next.getRank()) && cursor.getRank().equals(third.getRank())){	// if the three cards are of same rank
+				triple.append(cursor);											// append all three cards to that triple list
+				triple.append(next);
+				triple.append(third);
+			}
+			else if (cursor.getRank().equals(next.getRank()) && !cursor.getRank().equals(third.getRank())){	// if only two cards are of the same rank
+				singlePair.append(cursor);										// append both cards to the singlePair list
+				singlePair.append(next);
+			}
+			if (triple.length() == 3 && singlePair.length() == 2){				// if both lists are filled
+				contains = true;												// set the boolean to true
+			}
+			five.movePrev();													// move cursor back (so that cursor is now where next is)
+			five.movePrev();
+		}
+		return contains;														// return the boolean
+	}
+	
+	/** says whether the hand contains a four of a kind
+	@param takes a List
+	@return returns a boolean regarding whether it has a four of a kind **/
+	private boolean containsFourOfAKind(List five){
+		sortRank();																// sort the hand
+		boolean contains = false;												// initialize boolean to false
+		five.moveFront();														// move cursor of hand to front
+		while (five.index() != five.length()-2 && contains == false){			// while the cursor is not at the second to last entry in the hand and the boolean is still false
+			Card cursor = (Card) five.get();									// convert cursor to a card
+			five.moveNext();													// move cursor along hand
+			Card next = (Card) five.get(); 										// convert that "next" cursor to a card
+			five.moveNext();													// repeat for a third and fourth card
+			Card third = (Card) five.get();
+			five.moveNext();
+			Card fourth = (Card) five.get();
+			if (cursor.compareToRank(next) == 0 && cursor.compareToRank(third) == 0 && cursor.compareToRank(fourth) == 0){	// if the cards have the same rank
+				contains = true;												// change the boolean to true
+			}
+			for (int i = 0; i < 2; i++){										// move cursor back (so that cursor is now where next is)
+				five.movePrev();
+			}
+		}
+		return contains;														// return the boolean
+	}
+	
+	/** says whether or not the hand has a straight flush
+	@param takes a List
+	@return returns a boolean regarding whether it has a straight flush **/
+	private boolean containsStraightFlush(List five){
+		sortRank();																// sort the hand
+		boolean contains = false;												// initialize boolean to false
+		five.moveFront();														// move cursor of hand to front
+		while (five.index() != five.length()-4 && contains == false){			// while the cursor is not the fourth to last entry in the hand and the boolean is still false
+			Card cursor = (Card) five.get();									// convert cursor to a card
+			five.moveNext();													// move cursor along hand
+			Card next = (Card) five.get(); 										// convert that "next" cursor to a card
+			five.moveNext();													// repeat for a third, fourth, and fifth card
+			Card third = (Card) five.get();
+			five.moveNext();
+			Card fourth = (Card) five.get();
+			five.moveNext();
+			Card fifth = (Card) five.get();
+			int difference = fifth.convertRankToInt() - fourth.convertRankToInt() - third.convertRankToInt() - next.convertRankToInt() - cursor.convertRankToInt();
+			if (difference == 2-cursor.convertRankToInt()){						// if the difference is equal to 2 minus the cursor rank value
+				if (cursor.getSuit().equals(next.getSuit()) && cursor.getSuit().equals(third.getSuit()) && cursor.getSuit().equals(fourth.getSuit()) && cursor.getSuit().equals(fifth.getSuit())){	// if the suits all match
+					contains = true;											// change the boolean to true
+				}
+			}
+			for (int i = 0; i < 3; i++){										// move cursor back (so that cursor is now where next is)
+				five.moveBack();
+			}
+		}
+		return contains;														// return the boolean
+	}
+	
+	/** says whether or not the hand has a flush
+	@param takes a List
+	@return returns a boolean regarding whether it has a flush **/
+	private boolean containsFlush(List five){
+		sortRank();																// sort the hand
+		boolean contains = false;												// initialize boolean to false
+		int countSpade = 0;														// initialize counters for each suit
+		int countHeart = 0;
+		int countClub = 0;
+		int countDiamond = 0;
+		five.moveFront();														// move cursor of hand to front
+		while (contains == false){
+			Card cursor = (Card) five.get();									// convert cursor to a card
+			if (cursor.getSuit().equals("Spade")){								// if the cursor rank is spades
+				countSpade++;													// increment the spades counter
+			}
+			else if (cursor.getSuit().equals("Heart")){							// else if the cursor rank is hearts
+				countHeart++;													// increment the hearts counter
+			}
+			else if (cursor.getSuit().equals("Club")){							// else if the cursor rank is clubs
+				countClub++;													// increment the club counter
+			}
+			else if (cursor.getSuit().equals("Diamond")){						// else if the cursor rank is diamonds
+				countDiamond++;													// increment the diamond counter
+			}
+			if (countSpade == 5 || countHeart == 5 || countClub == 5 || countDiamond == 5){	// if any of the counters reach 5
+				contains = true;												// change the boolean to true
+			}
+			five.moveNext();													// move cursor along hand
+		}
+		return contains;														// return the boolean
+	}
+	
+	/** says whether or not the hand has a straight
+	@param takes a List
+	@return returns a boolean regarding whether it has a straight **/
+	private boolean containsStraight(List five){
+		sortRank();																// sort the hand
+		boolean contains = false;												// initialize boolean to false
+		five.moveFront();														// move cursor of hand to front
+		while (five.index() != five.length()-4 && contains == false){			// while the cursor is not the fourth to last entry in the hand and the boolean is still false
+			Card cursor = (Card) five.get();									// convert cursor to a card
+			five.moveNext();													// move cursor along hand
+			Card next = (Card) five.get(); 										// convert that "next" cursor to a card
+			five.moveNext();													// repeat for a third, fourth, and fifth card
+			Card third = (Card) five.get();
+			five.moveNext();
+			Card fourth = (Card) five.get();
+			five.moveNext();
+			Card fifth = (Card) five.get();
+			int difference = fifth.convertRankToInt() - fourth.convertRankToInt() - third.convertRankToInt() - next.convertRankToInt() - cursor.convertRankToInt();
+			if (difference == 2-cursor.convertRankToInt()){						// if the difference is equal to 2 minus the cursor rank value
+				contains = true;												// change the boolean to true
+			}
+			for (int i = 0; i < 3; i++){										// move cursor back (so that cursor is now where next is)
+				five.moveBack();
+			}
+		}
+		return contains;														// return the boolean
+	}
+	
+	/** says whether or not the hand has three of a kind
+	@param takes no arguments
+	@return returns a boolean regarding whether it has three of a kind **/
+	private boolean containsTriple(List five){
+		sortRank();																// sort the hand
+		boolean contains = false;												// initialize boolean to false
+		five.moveFront();														// move cursor of hand to front
+		while (five.index() != five.length()-2 && contains == false){			// while the cursor is not at the second to last entry in the hand and the boolean is still false
+			Card cursor = (Card) five.get();									// convert cursor to a card
+			five.moveNext();													// move cursor along hand
+			Card next = (Card) five.get(); 										// convert that "next" cursor to a card
+			five.moveNext();													// repeat for a third card
+			Card third = (Card) five.get();
+			if (cursor.compareToRank(next) == 0 && cursor.compareToRank(third) == 0){	// if the cards have the same rank
+				contains = true;												// change the boolean to true
+			}
+			five.movePrev();													// move cursor back (so that cursor is now where next is)
+		}
+		return contains;														// return the boolean
+	}
+	
+	/** says whether or not the hand has two pairs
+	@param takes no arguments
+	@return returns a boolean regarding whether it has two pairs **/
+	private boolean containsDouble(List five){
+		sortRank();																// sort the hand
+		boolean contains1 = false;												// initialize one boolean to false (for the first pair)
+		boolean contains2 = false;												// initialize a second boolean to false (for the second pair)
+		five.moveFront();														// move cursor of hand to front
+		while (!five.get().equals(five.back()) && contains1 == false){			// while the cursor is not at the back and the boolean is still false
+			Card cursor = (Card) five.get();									// convert cursor to a card
+			five.moveNext();													// move cursor along hand
+			Card next = (Card) five.get(); 										// convert that "next" cursor to a card
+			if (cursor.compareToRank(next) == 0){								// if the cards have the same rank
+				contains1 = true;												// change the boolean to true
+			}
+		}
+		if (contains1 == true){													// if the first boolean is true (ie containsSingle())
+			while (!five.get().equals(five.back()) && contains2 == false){		// repeat process from where you left off
+				Card cursor = (Card) five.get();
+				five.moveNext();
+				Card next = (Card) five.get(); 
+				if (cursor.compareToRank(next) == 0){
+					contains2 = true;
+				}
+			}
+		}
+		return (contains1 && contains2);										// return the logical and of both booleans
+	}
+	
+	/** says whether or not the hand has a single pair
+	@param takes a List 
+	@return returns a boolean regarding whether it has a single pair **/
+	private boolean containsSingle(List five){
+		sortRank();																// sort the hand 
+		boolean contains = false;												// initialize boolean to false
+		five.moveFront();														// move cursor of hand to front
+		while (!five.get().equals(five.back()) && contains == false){			// while the cursor is not at the back and the boolean is still false
+			Card cursor = (Card) five.get();									// convert cursor to a card
+			five.moveNext();													// move cursor along hand
+			Card next = (Card) five.get(); 										// convert that "next" cursor to a card
+			if (cursor.compareToRank(next) == 0){								// if the cards have the same rank
+				contains = true;												// change the boolean to true
+			}
+		}
+		return contains;														// return the boolean
+	}
+	
+	/** creates and returns a list of cards that beat the hand
+	@param takes two lists as arguments
+	@return returns a list as a hand to be thrown down to beat the arg1 hand **/
+	private List throwDouble(List arg1, List arg2){
+		List ret = new List();													// create new list to counter arg1
+		boolean thrown = false;													// status on whether the list hand is ready to be thrown down
+		arg2.moveFront();														// move arg2 cursor to front of respective list
+		while (arg2.get() != null && thrown == false){							// while the cursor has not reached the end of the list and the boolean is still false
+			arg1.moveBack();													// have cursor at end of arg2 list (should be the "largest" card)
+			Card topCard = (Card) arg1.get();									// convert cursors to cards
+			Card handCard = (Card) arg2.get();
+			// compare highest pair to highest arg1 pair
+			
+			// find first pair for ret
+			if (ret.length() < 2){												// if the length of the return list is less than two
+				if (ret.length() == 0){											// if the length of the return list is 0 (empty)
+					ret.append(handCard);										// append the hand card (first item in the return list)
+				}
+				else {															// else
+					if (((Card) ret.front()).getRank() != handCard.getRank()){	// if the rank of the card at the front of the list is different from the hand cursor card 
+						ret.clear();											// clear the return list 
+					}
+					ret.append(handCard);										// append the cursor hand card
+				}
+			}
+			// choose second (and highest) pair for ret
+			else if (ret.length() >= 2){										// else if the return length is at least two
+				if (ret.length() == 2){											// if the return list length is two (no entry for the second pair)
+					ret.append(handCard);										// append cursor hand card to the list
+				}
+				else {															// else
+					if (((Card) ret.back()).getRank() != handCard.getRank()){	// if the back of the return list (card 3 of what should be 4) is not the same rank as the hand cursor
+						ret.deleteBack();										// delete the back card of the return list (list is now 2 long)
+					}
+					ret.append(handCard);										// append the hand cursor to the list
+				}
+			}
+			arg2.moveNext();													// move the hand cursor (arg2) to the next spot in the list
+			
+			if (ret.length() == arg1.length()){									// if the length of the return list is equal to that of the arg1 list
+				thrown = true;													// change the boolean to true
+			}
+		}
+		if (thrown == false){													// if the boolean is still false
+			ret.clear();														// clear the list (list will be null)
+		}
+		return ret;																// return the list
+	}
+	
+	/** creates and returns a list of cards that beat the hand 
+	@param takes two lists (arg1 is top and arg2 is hand_
+	@return returns a list of what cards to throw down to beat the arg1 hand **/
+	private List throwSingle(List arg1, List arg2){
+		List ret = new List();													// create new list to counter arg1
+		boolean thrown = false;													// status on whether the list hand is ready to be thrown down
+		arg2.moveFront();														// move arg2 cursor to front of respective list 
+		while (arg2.get() != null && thrown == false){							// while the cursor has not reached the end of the list and the boolean is still false
+			arg1.moveBack();													// have cursor at end of arg2 list (should be the "largest" card)
+			Card topCard = (Card) arg1.get();									// convert cursors to cards
+			Card handCard = (Card) arg2.get();
+			if (topCard.compareToRank(handCard) < 0 || (topCard.compareToRank(handCard) == 0 && topCard.compareToSuit(handCard) == 1)){	// if the hand cursor is of same or higher rank or the top suit is greater than the hand suit
+				if (ret.length() != 0 && ((Card) ret.front()).getRank() != handCard.getRank()){	// if the return list is not zero and the front of that list is not the same suit as the arg2 cursor card
+					ret.deleteFront();											// delete the front of the list (length goes from 1 to 0)
+				}
+				ret.append(handCard);											// append the hand cursro card
+			}
+			if (ret.length() == arg1.length()){									// if the return list is the same length as arg1
+				thrown = true;													// change the boolean to true
+			}
+		}
+		if (thrown == false){													// if the boolean is still false at the end of the loop 
+			ret.clear();														// clear the list (list will be null)
+		}
+		return ret;																// return the list
+	}
+	
+	/** sort the bot's hand by rank
+	@param takes nothing
+	@return returns nothing **/
+	private void sortRank(){
+		List sorted = new List();												// create new list that is to be sorted version of the bot's hand
+		hand.moveFront();														// move hand cursor to front
+		while (hand.get() != null){												// while the cursor of the hand list is not the front
+			if (sorted.length() == 0){											// if the sorted list is empty, append the first item on the hand
+				sorted.append(hand.front());
+			}
+			else {
+				sorted.moveFront();
+				while (sorted.get() != null){
+					Card cursorCard = (Card) hand.get();						// convert sorted cursor
+					Card sortedCursorCard = (Card) sorted.get();				// convert hand cursor to card
+					if (cursorCard.compareToRank(sortedCursorCard) >= 0){		// if sortedcard rank is greater than or equal to cursorcard rank
+						sorted.insertBefore(cursorCard);						// insert cusorcard before sortedcard
+						sorted.moveBack();										// make sorted cursor null
+						sorted.moveNext();
+					}
+					else if (cursorCard.compareToRank(sortedCursorCard) == -1 && sorted.get().equals(sorted.back())){	// if sortedcatd rank is less than cursorcard rank and the sortedcard is the last card in the sorted list
+						sorted.append(cursorCard);								// append the cursor card to the sorted list
+						sorted.moveBack();										// make sorted cursor null
+						sorted.moveNext();
+					}
+					else {														// if sorted cursor is less than cursorcard and sortedcard is not the last card in the sorted list
+						sorted.moveNext();										// move to the next item on the sorted list
+					}
+				}
+			}
+			hand.moveNext();
+		}
+		hand = sorted;
+	}
+}

@@ -28,9 +28,11 @@ public class User{
 	// makes a move
 	// @param takes a list that is the top most card set thrown down in the pile
 	// @return returns nothing
-	public void move(List top){
+	public List move(List top){
 		sortRank();
+		List stack = new List();
 		
+		return stack;
 	}
 	
 	// says whether the hand contains a five card hand
@@ -51,9 +53,23 @@ public class User{
 	// @param takes no arguments
 	// @return returns a boolean regarding whether it has a full house
 	private boolean containsFullHouse(){
-		boolean contains = true;												// initialize a boolean to true
-		if (!containsSingle() && !containsTriple()){							// if the hand does not contain a pair and three of a kind
-			contains = false;													// set the boolean to false
+		sortRank();																// sort the hand
+		boolean contains = false;												// initialize boolean to false
+		hand.moveFront();														// move cursor of hand to front
+		while (hand.index() != hand.length()-2 && contains == false){			// while the cursor is not at the second to last entry in the hand and the boolean is still false
+			Card cursor = (Card) hand.get();									// convert cursor to a card
+			hand.moveNext();													// move cursor along hand
+			Card next = (Card) hand.get(); 										// convert that "next" cursor to a card
+			hand.moveNext();													// repeat for a third and fourth card
+			Card third = (Card) hand.get();
+			hand.moveNext();
+			Card fourth = (Card) hand.get();
+			if (cursor.compareToRank(next) == 0 && cursor.compareToRank(third) == 0 && cursor.compareToRank(fourth) == 0){	// if the cards have the same rank
+				contains = true;												// change the boolean to true
+			}
+			for (int i = 0; i < 2; i++){										// move cursor back (so that cursor is now where next is)
+				hand.movePrev();
+			}
 		}
 		return contains;														// return the boolean
 	}

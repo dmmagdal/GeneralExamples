@@ -8,30 +8,44 @@ public class Card {
 		rank = r;									// initialize rank
 	}
 	
-	// compare the ranks of this card to the rank of another
-	// @param takes the argument of a card to be compared to
-	// @return returns an int representative of the comparison
+	/** compare the ranks of this card to the rank of another
+	@param takes the argument of a card to be compared to
+	@return returns an int representative of the comparison **/
 	public int compareToRank(Card c){
 		int ret = 0;								// int variable that starts as 0 (values are equal)
 		if (c.convertRankToInt() > convertRankToInt()){
-			ret = -1;								// if rank is less than argument, int is -1
+			ret = 1;								// if rank is less than argument, int is -1
 		}
 		else if (c.convertRankToInt() < convertRankToInt()){
-			ret = 1;								// else if rank is greater than argument, int is 1
+			ret = -1;								// else if rank is greater than argument, int is 1
 		}
 		return ret;									// return the int
 	}
 	
-	// converts a rank to an int
-	// @param takes no arguments
-	// @return returns an int representative of the card's rank
+	/** compare the suits of this card to the suits of another
+	@param takes the argument of a card to be compared to
+	@return returns an int representative of the comparison **/
+	public int compareToSuit(Card c){
+		int ret = 0;								// int variable that starts as 0 (values are equal)
+		if (c.convertSuitToInt() > convertSuitToInt()){
+			ret = 1;								// if suit is less than argument, int is -1
+		}
+		else if (c.convertSuitToInt() < convertSuitToInt()){
+			ret = -1;								// else if suit is greater than argument, int is 1
+		}
+		return ret;									// return the int
+	}
+	
+	/** converts a rank to an int
+	@param takes no arguments
+	@return returns an int representative of the card's rank **/
 	public int convertRankToInt(){
 		int num = 0;
 		if (getRank().equals("Ace")){
 			num = 14;
 		}
 		else if (getRank().equals("Two")){
-			num = 2;
+			num = 15;
 		}
 		else if (getRank().equals("Three")){
 			num = 3;
@@ -65,6 +79,26 @@ public class Card {
 		}
 		else if (getRank().equals("King")){
 			num = 13;
+		}
+		return num;
+	}
+	
+	/** converts a suit to an int
+	@param takes no arguments
+	@return returns an int representative of the card's suit **/
+	public int convertSuitToInt(){
+		int num = 0;
+		if (getRank().equals("Spade")){
+			num = 4;
+		}
+		else if (getRank().equals("Heart")){
+			num = 3;
+		}
+		else if (getRank().equals("Club")){
+			num = 2;
+		}
+		else if (getRank().equals("Diamond")){
+			num = 1;
 		}
 		return num;
 	}
