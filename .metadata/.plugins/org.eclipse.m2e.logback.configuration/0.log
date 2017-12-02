@@ -194,3 +194,17 @@
 2017-11-26 11:32:41,469 [Worker-10] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is out-of-date. Remote download required.
 2017-11-26 12:56:12,349 [Stop Help Server] INFO  o.e.jetty.server.ServerConnector - Stopped ServerConnector@7b1dc8d0{HTTP/1.1}{127.0.0.1:0}
 2017-11-26 12:56:12,460 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@618f585c{/help,null,UNAVAILABLE}
+2017-11-27 14:42:28,242 [Start Help Server] INFO  org.eclipse.jetty.util.log - Logging initialized @24778ms
+2017-11-27 14:42:28,624 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-9.2.13.v20150730
+2017-11-27 14:42:28,717 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@1faf992{/help,null,AVAILABLE}
+2017-11-27 14:42:28,743 [Start Help Server] INFO  o.e.jetty.server.ServerConnector - Started ServerConnector@5c8411b9{HTTP/1.1}{127.0.0.1:50899}
+2017-11-27 14:42:28,743 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started @25284ms
+2017-11-27 17:00:26,332 [Stop Help Server] INFO  o.e.jetty.server.ServerConnector - Stopped ServerConnector@5c8411b9{HTTP/1.1}{127.0.0.1:0}
+2017-11-27 17:00:26,389 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@1faf992{/help,null,UNAVAILABLE}
+2017-11-27 19:19:18,440 [Start Help Server] INFO  org.eclipse.jetty.util.log - Logging initialized @15703ms
+2017-11-27 19:19:18,700 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-9.2.13.v20150730
+2017-11-27 19:19:18,873 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@d626410{/help,null,AVAILABLE}
+2017-11-27 19:19:18,933 [Start Help Server] INFO  o.e.jetty.server.ServerConnector - Started ServerConnector@11470024{HTTP/1.1}{127.0.0.1:56616}
+2017-11-27 19:19:18,934 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started @16202ms
+2017-11-27 19:23:20,535 [Stop Help Server] INFO  o.e.jetty.server.ServerConnector - Stopped ServerConnector@11470024{HTTP/1.1}{127.0.0.1:0}
+2017-11-27 19:23:20,586 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@d626410{/help,null,UNAVAILABLE}

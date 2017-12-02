@@ -379,7 +379,7 @@ public class Bot {
 			if (ret.length() == 0){
 				ret.append(handCard);
 			}
-			else if (ret.length() > 0`){
+			else if (ret.length() > 0){
 				
 			}
 		}
